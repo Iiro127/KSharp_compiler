@@ -2,7 +2,7 @@ package org.example.asm;
 
 import static jdk.internal.org.objectweb.asm.Opcodes.*;
 import static jdk.internal.org.objectweb.asm.Opcodes.INVOKEVIRTUAL;
-import static org.example.ByteCodeResource.mv;
+import static org.example.asm.ByteCodeResource.mv;
 
 public class PrintResource {
     public void emitPrint(String line) {

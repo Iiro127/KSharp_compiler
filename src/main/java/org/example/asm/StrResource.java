@@ -2,7 +2,7 @@ package org.example.asm;
 
 import static jdk.internal.org.objectweb.asm.Opcodes.*;
 import static jdk.internal.org.objectweb.asm.Opcodes.POP;
-import static org.example.ByteCodeResource.mv;
+import static org.example.asm.ByteCodeResource.mv;
 
 public class StrResource {
     public void addToMap(String name, String value){

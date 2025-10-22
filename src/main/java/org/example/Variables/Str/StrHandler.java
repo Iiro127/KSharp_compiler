@@ -20,11 +20,12 @@ public class StrHandler {
             String name = parts[0].replace("str", "").trim();
             String value = parts[1].replace("=", "").trim();
 
-            if (!varResource.isValidName(name)){
-                //return "Error at \"" + line + "\": Not a valid name.";
+            if (!varResource.isValidName(name)) {
+                System.err.println("Error at \"" + line + "\": Not a valid name.");
             } else {
                 strResource.addToMap(name, value);
             }
+
         } else if (line.contains("+")){
             String[] parts = line.split("\\+");
             String str1 = parts[0].replace("str", "").trim();
