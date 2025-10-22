@@ -4,7 +4,7 @@ import static jdk.internal.org.objectweb.asm.Opcodes.*;
 import static jdk.internal.org.objectweb.asm.Opcodes.INVOKEVIRTUAL;
 import static org.example.asm.ByteCodeResource.mv;
 
-public class PrintResource {
+public class Prints {
     public void emitPrint(String line) {
         String expr = line.replace("print", "").replace("//", "").trim();
 

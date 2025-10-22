@@ -1,13 +1,13 @@
 package org.example.Variables.Str;
 
 import org.example.Variables.VarResource;
-import org.example.asm.StrResource;
+import org.example.asm.Variables.Strs;
 
 import static org.example.InputReader.strings;
 
 public class StrHandler {
     private static final VarResource varResource = new VarResource();
-    private static final StrResource strResource = new StrResource();
+    private static final Strs STRS = new Strs();
 
     /**
      * Handles str-variables
@@ -23,7 +23,7 @@ public class StrHandler {
             if (!varResource.isValidName(name)) {
                 System.err.println("Error at \"" + line + "\": Not a valid name.");
             } else {
-                strResource.addToMap(name, value);
+                STRS.addToMap(name, value);
             }
 
         } else if (line.contains("+")){
