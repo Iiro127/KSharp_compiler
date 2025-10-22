@@ -1,13 +1,13 @@
 package org.example.Variables.Num;
 
 import org.example.Variables.VarResource;
-import org.example.asm.NumResource;
+import org.example.asm.Variables.Nums;
 
 
 public class NumHandler {
     private static final MathHandler mathHandler = new MathHandler();
     private static final VarResource varResource = new VarResource();
-    private static NumResource numResource = new NumResource();
+    private static Nums nums = new Nums();
 
     /**
      * Handles num-variables.
@@ -23,7 +23,7 @@ public class NumHandler {
                 System.err.println("Error at \"" + line + "\": Not a valid name.");
             } else {
                 Integer value = Integer.parseInt(parts[1].replace("=", "").trim());
-                numResource.addToMap(name, value);
+                nums.addToMap(name, value);
             }
         } else if (line.contains("+")) {
             mathHandler.addition(line);

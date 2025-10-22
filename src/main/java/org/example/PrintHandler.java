@@ -1,10 +1,10 @@
 package org.example;
 
 
-import org.example.asm.PrintResource;
+import org.example.asm.Prints;
 
 public class PrintHandler {
-    private static final PrintResource printResource = new PrintResource();
+    private static final Prints PRINTS = new Prints();
 
     /**
      * Handles all printing.
@@ -15,9 +15,9 @@ public class PrintHandler {
         String expr = line.replace("print", "").trim();
 
         if (expr.contains("//")){
-            printResource.emitPrint(expr);
+            PRINTS.emitPrint(expr);
         } else {
-            printResource.emitPrintVariable(expr);
+            PRINTS.emitPrintVariable(expr);
         }
     }
 }

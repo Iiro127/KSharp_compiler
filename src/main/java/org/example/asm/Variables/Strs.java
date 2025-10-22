@@ -1,15 +1,14 @@
-package org.example.asm;
+package org.example.asm.Variables;
 
 import static jdk.internal.org.objectweb.asm.Opcodes.*;
 import static jdk.internal.org.objectweb.asm.Opcodes.POP;
 import static org.example.asm.ByteCodeResource.mv;
 
-public class NumResource {
-    public void addToMap(String name, Integer value){
-        mv.visitFieldInsn(GETSTATIC, "KSharp", "integers", "Ljava/util/Map;");
+public class Strs {
+    public void addToMap(String name, String value){
+        mv.visitFieldInsn(GETSTATIC, "KSharp", "strings", "Ljava/util/Map;");
         mv.visitLdcInsn(name);
         mv.visitLdcInsn(value);
-        mv.visitMethodInsn(INVOKESTATIC, "java/lang/Integer", "valueOf", "(I)Ljava/lang/Integer;", false);
         mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", true);
         mv.visitInsn(POP);
     }
