@@ -1,14 +1,13 @@
 package org.example.Variables.Num;
 
 import org.example.Variables.VarResource;
-
-import static jdk.internal.org.objectweb.asm.Opcodes.*;
-import static org.example.ByteCodeResource.mv;
+import org.example.asm.NumResource;
 
 
 public class NumHandler {
     private static final MathHandler mathHandler = new MathHandler();
     private static final VarResource varResource = new VarResource();
+    private static NumResource numResource = new NumResource();
 
     /**
      * Handles num-variables.
@@ -20,10 +19,9 @@ public class NumHandler {
             String[] parts = line.split("=");
             String name = parts[0].replace("num", "").trim();
 
-            if (!varResource.isValidName(name)){
-            } else {
+            if (varResource.isValidName(name)){
                 Integer value = Integer.parseInt(parts[1].replace("=", "").trim());
-                addToMap(name, value);
+                numResource.addToMap(name, value);
             }
         } else if (line.contains("+")) {
             mathHandler.addition(line);
@@ -31,14 +29,5 @@ public class NumHandler {
             mathHandler.subtraction(line);
         }
 
-    }
-
-    private void addToMap(String name, Integer value){
-        mv.visitFieldInsn(GETSTATIC, "KSharp", "integers", "Ljava/util/Map;");
-        mv.visitLdcInsn(name);
-        mv.visitLdcInsn(value); // load primitive
-        mv.visitMethodInsn(INVOKESTATIC, "java/lang/Integer", "valueOf", "(I)Ljava/lang/Integer;", false);
-        mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", true);
-        mv.visitInsn(POP);
     }
 }
