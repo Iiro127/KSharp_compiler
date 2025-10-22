@@ -19,7 +19,9 @@ public class NumHandler {
             String[] parts = line.split("=");
             String name = parts[0].replace("num", "").trim();
 
-            if (varResource.isValidName(name)){
+            if (!varResource.isValidName(name)){
+                System.err.println("Error at \"" + line + "\": Not a valid name.");
+            } else {
                 Integer value = Integer.parseInt(parts[1].replace("=", "").trim());
                 numResource.addToMap(name, value);
             }
