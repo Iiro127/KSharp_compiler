@@ -8,14 +8,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static jdk.internal.org.objectweb.asm.Opcodes.*;
-import static org.example.InputReader.integers;
-import static org.example.InputReader.strings;
-import static org.example.asm.ByteCodeResource.mv;
-
 public class WhenHandler {
     public static final Map<String, String> conditionStr = new HashMap<>();
-    public static final Map<String, Integer> conditionInt = new HashMap<>();
+    //public static final Map<String, Integer> conditionInt = new HashMap<>();
     private static final InputReader inputReader = new InputReader();
     private static final WhenASTResource whenASTResource = new WhenASTResource();
     private static final WhenResource whenResource = new WhenResource();

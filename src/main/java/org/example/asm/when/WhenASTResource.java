@@ -8,12 +8,12 @@ import static org.example.asm.ByteCodeResource.mv;
 public class WhenASTResource {
     private static Label labelEnd = new Label();
     public void checkIfNumEquals(String name, Integer value){
-        mv.visitFieldInsn(GETSTATIC, "KSharp", "integers", "Ljava/util/Map;");
-        mv.visitLdcInsn("x");
+        mv.visitFieldInsn(GETSTATIC, "KSharp", "nums", "Ljava/util/Map;");
+        mv.visitLdcInsn(name);
         mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "get", "(Ljava/lang/Object;)Ljava/lang/Object;", true);
         mv.visitTypeInsn(CHECKCAST, "java/lang/Integer");
         mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Integer", "intValue", "()I", false);
-        mv.visitLdcInsn(5);
+        mv.visitLdcInsn(value);
         mv.visitJumpInsn(IF_ICMPNE, labelEnd);
 
         //TODO: Figure out how to read the input.
