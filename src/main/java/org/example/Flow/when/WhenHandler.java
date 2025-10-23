@@ -39,16 +39,14 @@ public class WhenHandler {
             String[] parts = condition.split("=");
             String name = parts[0].trim();
 
-            // This to AST?
             try {
                 Integer value = Integer.parseInt(parts[1].replace("=", "").trim());
                 nums.addToConditionMap(name, value);
-                whenASTResource.checkIfNumEquals(name, value);
+                whenASTResource.emitNumEquals(name, value, whenResource.parseBody(line));
             } catch (Exception e){
                 String value = parts[1].replace("=", "").trim();
                 conditionStr.put(name, value);
             }
-
         }
     }
 }
