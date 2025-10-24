@@ -1,7 +1,6 @@
 package org.example.asm;
 
-import static jdk.internal.org.objectweb.asm.Opcodes.*;
-import static jdk.internal.org.objectweb.asm.Opcodes.INVOKEVIRTUAL;
+import static org.objectweb.asm.Opcodes.*;
 import static org.example.asm.ByteCodeResource.mv;
 
 public class Prints {
