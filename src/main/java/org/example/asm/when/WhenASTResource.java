@@ -28,7 +28,6 @@ public class WhenASTResource {
                 mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "get", "(Ljava/lang/Object;)Ljava/lang/Object;", true);
                 mv.visitTypeInsn(CHECKCAST, "java/lang/Integer");
                 mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Integer", "intValue", "()I", false);
-                //Where does it check if it equals?
                 mv.visitLdcInsn(value);
                 mv.visitJumpInsn(IF_ICMPNE, labelEnd);
             }
@@ -38,7 +37,6 @@ public class WhenASTResource {
                 mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "get", "(Ljava/lang/Object;)Ljava/lang/Object;", true);
                 mv.visitTypeInsn(CHECKCAST, "java/lang/String");
                 mv.visitLdcInsn(value);
-                // Compare with .equals()
                 mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/Object;)Z", false);
                 mv.visitJumpInsn(IFEQ, labelEnd);
             }
