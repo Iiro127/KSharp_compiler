@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static jdk.internal.org.objectweb.asm.Opcodes.*;
+import static org.objectweb.asm.Opcodes.*;
 
 public class ByteCodeResource {
     public static ClassWriter cw = null;
@@ -36,15 +36,14 @@ public class ByteCodeResource {
         clinit.visitInsn(DUP);
         clinit.visitMethodInsn(INVOKESPECIAL, "java/util/HashMap", "<init>", "()V", false);
         clinit.visitFieldInsn(PUTSTATIC, "KSharp", "strs", "Ljava/util/Map;");
-
         clinit.visitInsn(RETURN);
         clinit.visitMaxs(0, 0);
         clinit.visitEnd();
 
+        variableResource.emitGetVariableMethod();
+
         mv = cw.visitMethod(ACC_PUBLIC + ACC_STATIC, "main", "([Ljava/lang/String;)V",  null, null);
         mv.visitCode();
-
-        variableResource.emitGetVariableMethod();
     }
     public void createClass(String outputName) {
         Path filePath = Path.of(outputName);

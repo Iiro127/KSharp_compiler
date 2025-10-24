@@ -9,7 +9,7 @@ import org.objectweb.asm.Label;
 
 import java.io.IOException;
 
-import static jdk.internal.org.objectweb.asm.Opcodes.*;
+import static org.objectweb.asm.Opcodes.*;
 import static org.example.asm.ByteCodeResource.mv;
 
 public class WhenASTResource {

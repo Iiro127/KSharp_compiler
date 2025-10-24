@@ -5,7 +5,10 @@ import org.example.Variables.Num.NumHandler;
 import org.example.Variables.Str.StrHandler;
 import org.example.asm.ByteCodeResource;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -55,6 +58,6 @@ public class InputReader {
             }
         }
 
-        byteCodeResource.createClass("src/main/java/KSharp.class");
+        byteCodeResource.createClass(Path.of(System.getProperty("user.dir"), "KSharp.class").toString());
     }
 }
