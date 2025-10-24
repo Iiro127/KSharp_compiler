@@ -18,9 +18,12 @@ public class ByteCodeResource {
         cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
         cw.visit(V17, ACC_PUBLIC, "KSharp", null, "java/lang/Object", null);
 
-        // Maps for nums
+        // Maps for variables
         cw.visitField(ACC_PUBLIC + ACC_STATIC, "nums", "Ljava/util/Map;", null, null).visitEnd();
+        cw.visitField(ACC_PUBLIC + ACC_STATIC, "strs", "Ljava/util/Map;", null, null).visitEnd();
+
         cw.visitField(ACC_PUBLIC + ACC_STATIC, "conditionNum", "Ljava/util/Map;", null, null).visitEnd();
+        cw.visitField(ACC_PUBLIC + ACC_STATIC, "conditionStr", "Ljava/util/Map;", null, null).visitEnd();
 
         MethodVisitor clinit = cw.visitMethod(ACC_STATIC, "<clinit>", "()V", null, null);
         clinit.visitCode();
@@ -31,11 +34,23 @@ public class ByteCodeResource {
         clinit.visitMethodInsn(INVOKESPECIAL, "java/util/HashMap", "<init>", "()V", false);
         clinit.visitFieldInsn(PUTSTATIC, "KSharp", "nums", "Ljava/util/Map;");
 
+        // strs = new HashMap<>();
+        clinit.visitTypeInsn(NEW, "java/util/HashMap");
+        clinit.visitInsn(DUP);
+        clinit.visitMethodInsn(INVOKESPECIAL, "java/util/HashMap", "<init>", "()V", false);
+        clinit.visitFieldInsn(PUTSTATIC, "KSharp", "strs", "Ljava/util/Map;");
+
         // conditionNum = new HashMap<>();
         clinit.visitTypeInsn(NEW, "java/util/HashMap");
         clinit.visitInsn(DUP);
         clinit.visitMethodInsn(INVOKESPECIAL, "java/util/HashMap", "<init>", "()V", false);
         clinit.visitFieldInsn(PUTSTATIC, "KSharp", "conditionNum", "Ljava/util/Map;");
+
+        // conditionStrs = new HashMap<>();
+        clinit.visitTypeInsn(NEW, "java/util/HashMap");
+        clinit.visitInsn(DUP);
+        clinit.visitMethodInsn(INVOKESPECIAL, "java/util/HashMap", "<init>", "()V", false);
+        clinit.visitFieldInsn(PUTSTATIC, "KSharp", "conditionStrs", "Ljava/util/Map;");
 
         clinit.visitInsn(RETURN);
         clinit.visitMaxs(0, 0);

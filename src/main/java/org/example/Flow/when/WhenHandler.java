@@ -33,7 +33,7 @@ public class WhenHandler {
      *
      * @param condition
      */
-    private void handleCondition(String condition) throws IOException {
+    private void handleCondition(String condition) {
         if (condition.contains("=")){
 
             String[] parts = condition.split("=");
