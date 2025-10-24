@@ -18,17 +18,33 @@ public class WhenASTResource {
     private static final StrHandler strHandler = new StrHandler();
     private static final PrintHandler printHandler = new PrintHandler();
     private static final WhenHandler whenHandler = new WhenHandler();
-    private static final Label labelEnd = new Label();
-    public void emitNumEquals(String name, Integer value, String body) throws IOException {
-        mv.visitFieldInsn(GETSTATIC, "KSharp", "nums", "Ljava/util/Map;");
-        mv.visitLdcInsn(name);
-        mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "get", "(Ljava/lang/Object;)Ljava/lang/Object;", true);
-        mv.visitTypeInsn(CHECKCAST, "java/lang/Integer");
-        mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Integer", "intValue", "()I", false);
-        mv.visitLdcInsn(value);
-        mv.visitJumpInsn(IF_ICMPNE, labelEnd);
+    public void emitEquals(String type, String name, Object value, String body) throws IOException {
+        Label labelEnd = new Label();
 
-        // Cannot directly use inputReader.readInput(body) due to context issues, hence why this is here.
+        switch (type) {
+            case "num" -> {
+                mv.visitFieldInsn(GETSTATIC, "KSharp", "nums", "Ljava/util/Map;");
+                mv.visitLdcInsn(name);
+                mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "get", "(Ljava/lang/Object;)Ljava/lang/Object;", true);
+                mv.visitTypeInsn(CHECKCAST, "java/lang/Integer");
+                mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Integer", "intValue", "()I", false);
+                //Where does it check if it equals?
+                mv.visitLdcInsn(value);
+                mv.visitJumpInsn(IF_ICMPNE, labelEnd);
+            }
+            case "str" -> {
+                mv.visitFieldInsn(GETSTATIC, "KSharp", "strs", "Ljava/util/Map;");
+                mv.visitLdcInsn(name);
+                mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "get", "(Ljava/lang/Object;)Ljava/lang/Object;", true);
+                mv.visitTypeInsn(CHECKCAST, "java/lang/String");
+                mv.visitLdcInsn(value);
+                // Compare with .equals()
+                mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/Object;)Z", false);
+                mv.visitJumpInsn(IFEQ, labelEnd);
+            }
+        }
+
+        // Body
         for (String line : inputReader.parseLines(body)) {
             if (line.startsWith("print")) printHandler.handlePrint(line);
             if (line.startsWith("num")) numHandler.handleNum(line);
@@ -38,4 +54,5 @@ public class WhenASTResource {
 
         mv.visitLabel(labelEnd);
     }
+
 }

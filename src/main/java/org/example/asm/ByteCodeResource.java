@@ -50,7 +50,7 @@ public class ByteCodeResource {
         clinit.visitTypeInsn(NEW, "java/util/HashMap");
         clinit.visitInsn(DUP);
         clinit.visitMethodInsn(INVOKESPECIAL, "java/util/HashMap", "<init>", "()V", false);
-        clinit.visitFieldInsn(PUTSTATIC, "KSharp", "conditionStrs", "Ljava/util/Map;");
+        clinit.visitFieldInsn(PUTSTATIC, "KSharp", "conditionStr", "Ljava/util/Map;");
 
         clinit.visitInsn(RETURN);
         clinit.visitMaxs(0, 0);

@@ -2,6 +2,7 @@ package org.example.Flow.when;
 
 import org.example.InputReader;
 import org.example.asm.Variables.Nums;
+import org.example.asm.Variables.Strs;
 import org.example.asm.when.WhenASTResource;
 
 import java.io.IOException;
@@ -15,6 +16,7 @@ public class WhenHandler {
     private static final WhenASTResource whenASTResource = new WhenASTResource();
     private static final WhenResource whenResource = new WhenResource();
     private static final Nums nums = new Nums();
+    private static final Strs strs = new Strs();
     private static String line;
 
     /**
@@ -33,7 +35,7 @@ public class WhenHandler {
      *
      * @param condition
      */
-    private void handleCondition(String condition) {
+    private void handleCondition(String condition) throws IOException {
         if (condition.contains("=")){
 
             String[] parts = condition.split("=");
@@ -41,11 +43,10 @@ public class WhenHandler {
 
             try {
                 Integer value = Integer.parseInt(parts[1].replace("=", "").trim());
-                nums.addToConditionMap(name, value);
-                whenASTResource.emitNumEquals(name, value, whenResource.parseBody(line));
+                whenASTResource.emitEquals("num", name, value, whenResource.parseBody(line));
             } catch (Exception e){
                 String value = parts[1].replace("=", "").trim();
-                conditionStr.put(name, value);
+                whenASTResource.emitEquals("str", name, value, whenResource.parseBody(line));
             }
         }
     }
