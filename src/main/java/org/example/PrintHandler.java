@@ -4,7 +4,7 @@ package org.example;
 import org.example.asm.Prints;
 
 public class PrintHandler {
-    private static final Prints PRINTS = new Prints();
+    private static final Prints prints = new Prints();
 
     /**
      * Handles all printing.
@@ -15,9 +15,9 @@ public class PrintHandler {
         String expr = line.replace("print", "").trim();
 
         if (expr.contains("//")){
-            PRINTS.emitPrint(expr);
+            prints.emitPrint(expr);
         } else {
-            PRINTS.emitPrintVariable(expr);
+            prints.emitPrintVariable(expr);
         }
     }
 }

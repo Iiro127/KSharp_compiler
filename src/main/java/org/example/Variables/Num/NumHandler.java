@@ -26,9 +26,9 @@ public class NumHandler {
                 nums.addToMap(name, value);
             }
         } else if (line.contains("+")) {
-            mathHandler.addition(line);
+            //mathHandler.addition(line);
         } else if (line.contains("-")) {
-            mathHandler.subtraction(line);
+            //mathHandler.subtraction(line);
         }
 
     }

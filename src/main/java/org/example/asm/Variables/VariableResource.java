@@ -21,12 +21,12 @@ public class VariableResource {
         Label L_notFound = new Label();
         Label L_end = new Label();
 
-        mv.visitFieldInsn(GETSTATIC, "KSharp", "integers", "Ljava/util/Map;");
+        mv.visitFieldInsn(GETSTATIC, "KSharp", "nums", "Ljava/util/Map;");
         mv.visitVarInsn(ALOAD, 0); // load expr
         mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "containsKey", "(Ljava/lang/Object;)Z", true);
         mv.visitJumpInsn(IFEQ, L_notFound);
 
-        mv.visitFieldInsn(GETSTATIC, "KSharp", "integers", "Ljava/util/Map;");
+        mv.visitFieldInsn(GETSTATIC, "KSharp", "nums", "Ljava/util/Map;");
         mv.visitVarInsn(ALOAD, 0);
         mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "get", "(Ljava/lang/Object;)Ljava/lang/Object;", true);
         mv.visitTypeInsn(CHECKCAST, "java/lang/Integer");
