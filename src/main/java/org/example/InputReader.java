@@ -47,7 +47,6 @@ public class InputReader {
      */
     public void readInput(String input) throws IOException {
         for (String line : parseLines(input)) {
-            //System.out.println(line);
             switch (line) {
                 case String s when s.startsWith("num") -> numHandler.handleNum(s);
                 case String s when s.startsWith("str") -> strHandler.handleStr(s);
