@@ -39,7 +39,6 @@ public class InputReader {
         return lines;
     }
 
-
     /**
      * Reads console input.
      *
