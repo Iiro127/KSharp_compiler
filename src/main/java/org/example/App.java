@@ -21,6 +21,6 @@ public class App
 
         String filePath = args[0];
         String input = Files.readString(Path.of(filePath));
-        inputReader.readInput(input, filePath);
+        inputReader.handleInput(input, filePath);
     }
 }

@@ -20,7 +20,18 @@ public class InputReader {
     private static final WhenHandler whenHandler = new WhenHandler();
     private static final ByteCodeResource byteCodeResource = new ByteCodeResource();
 
-    public ArrayList<String> parseLines(String input) {
+    /**
+     * Handles console input.
+     *
+     * @param input
+     */
+    public void handleInput(String input, String filePath) throws IOException {
+        readInput(input);
+
+        byteCodeResource.createClass(Path.of(System.getProperty("user.dir"), filePath.replace(".ks", "") + ".class").toString());
+    }
+
+    public static ArrayList<String> parseLines(String input) {
         ArrayList<String> lines = new ArrayList<>();
         StringBuilder instruction = new StringBuilder();
 
@@ -41,11 +52,12 @@ public class InputReader {
     }
 
     /**
-     * Reads console input.
+     * Reads input
      *
      * @param input
+     * @throws IOException
      */
-    public void readInput(String input, String filePath) throws IOException {
+    public static void readInput(String input) throws IOException {
         for (String line : parseLines(input)) {
             switch (line) {
                 case String s when s.startsWith("num") -> numHandler.handleNum(s);
@@ -55,7 +67,6 @@ public class InputReader {
                 default -> System.out.println("Unknown command: " + line);
             }
         }
-
-        byteCodeResource.createClass(Path.of(System.getProperty("user.dir"), filePath.replace(".ks", "") + ".class").toString());
     }
+
 }

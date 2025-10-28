@@ -21,9 +21,16 @@ public class ByteCodeResource {
         // Maps for variables
         cw.visitField(ACC_PUBLIC + ACC_STATIC, "nums", "Ljava/util/Map;", null, null).visitEnd();
         cw.visitField(ACC_PUBLIC + ACC_STATIC, "strs", "Ljava/util/Map;", null, null).visitEnd();
+        cw.visitField(ACC_PUBLIC + ACC_STATIC, "funcs", "Ljava/util/Map;", null, null).visitEnd();
 
         MethodVisitor clinit = cw.visitMethod(ACC_STATIC, "<clinit>", "()V", null, null);
         clinit.visitCode();
+
+        // funcs = new HashMap<>();
+        clinit.visitTypeInsn(NEW, "java/util/HashMap");
+        clinit.visitInsn(DUP);
+        clinit.visitMethodInsn(INVOKESPECIAL, "java/util/HashMap", "<init>", "()V", false);
+        clinit.visitFieldInsn(PUTSTATIC, "KSharp", "funcs", "Ljava/util/Map;");
 
         // nums = new HashMap<>();
         clinit.visitTypeInsn(NEW, "java/util/HashMap");
