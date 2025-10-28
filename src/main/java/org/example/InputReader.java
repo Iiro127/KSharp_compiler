@@ -5,9 +5,7 @@ import org.example.Variables.Num.NumHandler;
 import org.example.Variables.Str.StrHandler;
 import org.example.asm.ByteCodeResource;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,7 +45,7 @@ public class InputReader {
      *
      * @param input
      */
-    public void readInput(String input) throws IOException {
+    public void readInput(String input, String filePath) throws IOException {
         for (String line : parseLines(input)) {
             switch (line) {
                 case String s when s.startsWith("num") -> numHandler.handleNum(s);
@@ -58,6 +56,6 @@ public class InputReader {
             }
         }
 
-        byteCodeResource.createClass(Path.of(System.getProperty("user.dir"), "KSharp.class").toString());
+        byteCodeResource.createClass(Path.of(System.getProperty("user.dir"), filePath.replace(".ks", "") + ".class").toString());
     }
 }
