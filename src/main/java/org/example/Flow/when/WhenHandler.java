@@ -24,7 +24,7 @@ public class WhenHandler {
      *
      * @param input
      */
-    public void handleWhen(String input) throws IOException {
+    public static void handleWhen(String input) throws IOException {
         line = input;
         String condition = whenResource.parseCondition(line);
         handleCondition(condition);
@@ -35,7 +35,7 @@ public class WhenHandler {
      *
      * @param condition
      */
-    private void handleCondition(String condition) throws IOException {
+    private static void handleCondition(String condition) throws IOException {
         if (condition.contains("=")){
 
             String[] parts = condition.split("=");

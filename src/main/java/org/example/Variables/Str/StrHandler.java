@@ -14,7 +14,7 @@ public class StrHandler {
      *
      * @param line
      */
-    public void handleStr(String line){
+    public static void handleStr(String line){
         if (line.contains("=")){
             String[] parts = line.split("=");
             String name = parts[0].replace("str", "").trim();

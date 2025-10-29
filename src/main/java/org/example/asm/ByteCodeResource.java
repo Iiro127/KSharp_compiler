@@ -51,6 +51,13 @@ public class ByteCodeResource {
 
         mv = cw.visitMethod(ACC_PUBLIC + ACC_STATIC, "main", "([Ljava/lang/String;)V",  null, null);
         mv.visitCode();
+
+        mv.visitMethodInsn(INVOKESTATIC, "KSharp", "main", "()V", false);
+
+        mv.visitInsn(RETURN);
+        mv.visitMaxs(0, 0);
+        mv.visitEnd();
+
     }
     public void createClass(String outputName) {
         Path filePath = Path.of(outputName);
@@ -68,5 +75,4 @@ public class ByteCodeResource {
             throw new RuntimeException(e);
         }
     }
-
 }

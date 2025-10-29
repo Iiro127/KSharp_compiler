@@ -4,7 +4,7 @@ import java.util.Set;
 
 public class VarResource {
     private static final Set<String> reservedWords = Set.of(
-        "str", "num", "print", "when"
+        "str", "num", "print", "when", "func"
     );
 
 

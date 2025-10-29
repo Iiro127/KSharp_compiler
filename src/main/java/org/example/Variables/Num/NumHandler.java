@@ -14,7 +14,7 @@ public class NumHandler {
      *
      * @param line
      */
-    public void handleNum(String line){
+    public static void handleNum(String line){
         if (line.contains("=")){
             String[] parts = line.split("=");
             String name = parts[0].replace("num", "").trim();
@@ -30,6 +30,5 @@ public class NumHandler {
         } else if (line.contains("-")) {
             //mathHandler.subtraction(line);
         }
-
     }
 }
