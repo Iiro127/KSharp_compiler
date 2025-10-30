@@ -11,7 +11,7 @@ public class PrintHandler {
      *
      * @param line
      */
-    public void handlePrint(String line){
+    public static void handlePrint(String line){
         String expr = line.replace("print", "").trim();
 
         if (expr.contains("//")){

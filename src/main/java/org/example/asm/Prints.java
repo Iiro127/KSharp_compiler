@@ -1,5 +1,7 @@
 package org.example.asm;
 
+import org.example.App;
+
 import static org.objectweb.asm.Opcodes.*;
 import static org.example.asm.ByteCodeResource.mv;
 
@@ -22,7 +24,7 @@ public class Prints {
         mv.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
 
         mv.visitLdcInsn(expr.replace("print", "").replace("//", "").trim());
-        mv.visitMethodInsn(INVOKESTATIC, "KSharp", "getVariable", "(Ljava/lang/String;)Ljava/lang/String;", false);
+        mv.visitMethodInsn(INVOKESTATIC, App.fileName, "getVariable", "(Ljava/lang/String;)Ljava/lang/String;", false);
 
         mv.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
     }
