@@ -46,7 +46,8 @@ func number(){
 }
 
 func summary(){
-  print That was a number!//;
+  str text = That was a number!;
+  print text;
 }
 ```
 
