@@ -17,18 +17,17 @@ import java.util.Map;
 public class InputReader {
     public static Map<String, String> strings = new HashMap<>();
     public static Map<String, Integer> integers = new HashMap<>();
-    private static ByteCodeResource byteCodeResource = null;
 
     /**
      * Handles console input.
      *
      * @param input
      */
-    public void handleInput(String input, String filePath) throws Exception {
-        byteCodeResource = new ByteCodeResource();
+    public void handleInput(String input, String file) throws Exception {
+        ByteCodeResource byteCodeResource = new ByteCodeResource();
         Funcs.compileFunctions(FuncHandler.getAllFuncs(input));
 
-        byteCodeResource.createClass(Path.of(System.getProperty("user.dir"), filePath.replace(".ks", "") + ".class").toString());
+        byteCodeResource.createClass(Path.of(System.getProperty("user.dir"), file + ".class").toString());
     }
 
     public static ArrayList<String> parseLines(String input) {
@@ -64,7 +63,7 @@ public class InputReader {
                 case String s when s.startsWith("str") -> StrHandler.handleStr(s);
                 case String s when s.startsWith("print") -> PrintHandler.handlePrint(s);
                 case String s when s.startsWith("when") -> WhenHandler.handleWhen(s);
-                case String s when s.startsWith("func") -> FuncHandler.handleFunc(s);
+                case String s when s.startsWith("func:") -> FuncHandler.handleFuncCall(s);
                 default -> System.out.println("Unknown command: " + line);
             }
         }

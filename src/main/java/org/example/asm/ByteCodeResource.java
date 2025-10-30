@@ -1,5 +1,6 @@
 package org.example.asm;
 
+import org.example.App;
 import org.example.asm.Variables.VariableResource;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
@@ -13,10 +14,13 @@ import static org.objectweb.asm.Opcodes.*;
 public class ByteCodeResource {
     public static ClassWriter cw = null;
     public static MethodVisitor mv = null;
+    public static MethodVisitor clinitMv = null;
     private static final VariableResource variableResource = new VariableResource();
     public ByteCodeResource() {
+        String fileName = App.fileName;
+
         cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
-        cw.visit(V17, ACC_PUBLIC, "KSharp", null, "java/lang/Object", null);
+        cw.visit(V17, ACC_PUBLIC, fileName, null, "java/lang/Object", null);
 
         // Maps for variables
         cw.visitField(ACC_PUBLIC + ACC_STATIC, "nums", "Ljava/util/Map;", null, null).visitEnd();
@@ -25,24 +29,25 @@ public class ByteCodeResource {
 
         MethodVisitor clinit = cw.visitMethod(ACC_STATIC, "<clinit>", "()V", null, null);
         clinit.visitCode();
+        clinitMv = clinit;
 
         // funcs = new HashMap<>();
         clinit.visitTypeInsn(NEW, "java/util/HashMap");
         clinit.visitInsn(DUP);
         clinit.visitMethodInsn(INVOKESPECIAL, "java/util/HashMap", "<init>", "()V", false);
-        clinit.visitFieldInsn(PUTSTATIC, "KSharp", "funcs", "Ljava/util/Map;");
+        clinit.visitFieldInsn(PUTSTATIC, fileName, "funcs", "Ljava/util/Map;");
 
         // nums = new HashMap<>();
         clinit.visitTypeInsn(NEW, "java/util/HashMap");
         clinit.visitInsn(DUP);
         clinit.visitMethodInsn(INVOKESPECIAL, "java/util/HashMap", "<init>", "()V", false);
-        clinit.visitFieldInsn(PUTSTATIC, "KSharp", "nums", "Ljava/util/Map;");
+        clinit.visitFieldInsn(PUTSTATIC, fileName, "nums", "Ljava/util/Map;");
 
         // strs = new HashMap<>();
         clinit.visitTypeInsn(NEW, "java/util/HashMap");
         clinit.visitInsn(DUP);
         clinit.visitMethodInsn(INVOKESPECIAL, "java/util/HashMap", "<init>", "()V", false);
-        clinit.visitFieldInsn(PUTSTATIC, "KSharp", "strs", "Ljava/util/Map;");
+        clinit.visitFieldInsn(PUTSTATIC, fileName, "strs", "Ljava/util/Map;");
         clinit.visitInsn(RETURN);
         clinit.visitMaxs(0, 0);
         clinit.visitEnd();
@@ -52,12 +57,11 @@ public class ByteCodeResource {
         mv = cw.visitMethod(ACC_PUBLIC + ACC_STATIC, "main", "([Ljava/lang/String;)V",  null, null);
         mv.visitCode();
 
-        mv.visitMethodInsn(INVOKESTATIC, "KSharp", "main", "()V", false);
+        mv.visitMethodInsn(INVOKESTATIC, fileName, "main", "()V", false);
 
         mv.visitInsn(RETURN);
         mv.visitMaxs(0, 0);
         mv.visitEnd();
-
     }
     public void createClass(String outputName) {
         Path filePath = Path.of(outputName);

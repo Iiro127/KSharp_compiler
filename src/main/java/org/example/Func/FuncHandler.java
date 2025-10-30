@@ -2,8 +2,8 @@ package org.example.Func;
 
 import org.example.InputReader;
 import org.example.Variables.VarResource;
+import org.example.asm.Func.Funcs;
 
-import javax.naming.NamingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,8 +29,7 @@ public class FuncHandler {
                         throw new Exception("Duplicate main function");
                 }
                 funcs.put(name, InputReader.parseLines(body));
-
-                System.out.println(name + "\n" + body + "\n");
+                System.out.println(name);
             } else {
                 throw new Exception("Invalid function name: " + name);
             }
@@ -42,8 +41,8 @@ public class FuncHandler {
             return funcs;
         }
     }
-
-    public static void handleFunc(String line) throws NamingException {
-        // is this needed?
+    public static void handleFuncCall(String input) {
+        input = input.replaceAll("func:", "").trim();
+        Funcs.handleFuncCall(input);
     }
 }

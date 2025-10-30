@@ -1,5 +1,6 @@
 package org.example.asm.when;
 
+import org.example.App;
 import org.example.Flow.when.WhenHandler;
 import org.example.InputReader;
 import org.example.PrintHandler;
@@ -23,7 +24,7 @@ public class WhenASTResource {
 
         switch (type) {
             case "num" -> {
-                mv.visitFieldInsn(GETSTATIC, "KSharp", "nums", "Ljava/util/Map;");
+                mv.visitFieldInsn(GETSTATIC, App.fileName, "nums", "Ljava/util/Map;");
                 mv.visitLdcInsn(name);
                 mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "get", "(Ljava/lang/Object;)Ljava/lang/Object;", true);
                 mv.visitTypeInsn(CHECKCAST, "java/lang/Integer");
@@ -32,7 +33,7 @@ public class WhenASTResource {
                 mv.visitJumpInsn(IF_ICMPNE, labelEnd);
             }
             case "str" -> {
-                mv.visitFieldInsn(GETSTATIC, "KSharp", "strs", "Ljava/util/Map;");
+                mv.visitFieldInsn(GETSTATIC, App.fileName, "strs", "Ljava/util/Map;");
                 mv.visitLdcInsn(name);
                 mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "get", "(Ljava/lang/Object;)Ljava/lang/Object;", true);
                 mv.visitTypeInsn(CHECKCAST, "java/lang/String");

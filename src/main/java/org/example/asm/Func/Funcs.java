@@ -1,5 +1,6 @@
 package org.example.asm.Func;
 
+import org.example.App;
 import org.example.InputReader;
 import org.example.asm.ByteCodeResource;
 import org.objectweb.asm.MethodVisitor;
@@ -24,15 +25,24 @@ public class Funcs {
             ByteCodeResource.mv = mv;
             mv.visitCode();
 
-            for (String line : body) {
-                InputReader.readInput(line);
+            try {
+                for (String line : body) {
+                    InputReader.readInput(line);
+                }
+            } finally {
+                ByteCodeResource.mv = oldMv;
             }
-
-            ByteCodeResource.mv = oldMv;
 
             mv.visitInsn(RETURN);
             mv.visitMaxs(0, 0);
             mv.visitEnd();
+
+            ByteCodeResource.mv = oldMv;
         }
+    }
+    public static void handleFuncCall(String input) {
+        String funcName = input.replace("()", "").trim();
+
+        ByteCodeResource.mv.visitMethodInsn(INVOKESTATIC, App.fileName, funcName, "()V", false);
     }
 }

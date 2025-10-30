@@ -1,12 +1,14 @@
 package org.example.asm.Variables;
 
+import org.example.App;
+
 import static org.objectweb.asm.Opcodes.*;
 import static org.objectweb.asm.Opcodes.POP;
 import static org.example.asm.ByteCodeResource.mv;
 
 public class Nums {
     public void addToMap(String name, Integer value){
-        mv.visitFieldInsn(GETSTATIC, "KSharp", "nums", "Ljava/util/Map;");
+        mv.visitFieldInsn(GETSTATIC, App.fileName, "nums", "Ljava/util/Map;");
         mv.visitLdcInsn(name);
         mv.visitLdcInsn(value);
         mv.visitMethodInsn(INVOKESTATIC, "java/lang/Integer", "valueOf", "(I)Ljava/lang/Integer;", false);
