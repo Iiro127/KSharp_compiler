@@ -29,7 +29,6 @@ public class FuncHandler {
                         throw new Exception("Duplicate main function");
                 }
                 funcs.put(name, InputReader.parseLines(body));
-                System.out.println(name);
             } else {
                 throw new Exception("Invalid function name: " + name);
             }
