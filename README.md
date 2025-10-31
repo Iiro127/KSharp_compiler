@@ -25,7 +25,7 @@ java -jar /path/to/your/KSharp_compiler.jar "$@"
 Once you have your bytecode (.class-file), you can run it like you would run any bytecode in the JVM:
 
 ```text
-java yourByteCode
+java fileName
 ```
 
 
