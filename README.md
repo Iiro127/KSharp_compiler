@@ -42,7 +42,9 @@ func main(){
 
 func number(){
   num x = 5;
-  print x;
+  when (x = 5) {
+   print x;
+  };
 }
 
 func summary(){
