@@ -20,11 +20,12 @@ public class App
         }
 
         fileName = args[0];
-        String input = Files.readString(Path.of(fileName));
-        fileName = fileName.replace(".ks", "");
-        /*String filePath = "KSharp";
-        String input = "func main(){ func:number(); };" +
-                "func number(){ num y = 12; print y; }";*/
-        inputReader.handleInput(input, fileName);
+        if (fileName.equals("--version")){
+            System.out.println("KSharp compiler 1.0.1");
+        } else {
+            String input = Files.readString(Path.of(fileName));
+            fileName = fileName.replace(".ks", "");
+            inputReader.handleInput(input, fileName);
+        }
     }
 }
