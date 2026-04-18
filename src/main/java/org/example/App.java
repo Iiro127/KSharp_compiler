@@ -22,10 +22,12 @@ public class App
         fileName = args[0];
         if (fileName.equals("--version")){
             System.out.println("KSharp compiler 1.0.1");
-        } else {
-            String input = Files.readString(Path.of(fileName));
-            fileName = fileName.replace(".ks", "");
-            inputReader.handleInput(input, fileName);
+            return;
         }
+
+        String input = Files.readString(Path.of(fileName));
+        fileName = fileName.replace(".ks", "");
+        inputReader.handleInput(input, fileName);
+
     }
 }
